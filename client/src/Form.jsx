@@ -14,6 +14,9 @@ const Form = () => {
   const handleApiResponse = async (e, requestType) => {
     e.preventDefault();
     try {
+      if(requestType === "translate" && !formData.translate_to){
+        formData.translate_to = "C++"
+      }
       const axiosConfig = {
         method: "post",
         url: `http://localhost:3000/api/v1/${requestType}`, 
@@ -22,7 +25,7 @@ const Form = () => {
         },
         data: {
           code: formData.code,
-          translate_to: formData.translate_to,
+          translate_to: formData.translate_to || "C++",
         },
       };
 
